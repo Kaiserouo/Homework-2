@@ -65,14 +65,17 @@ def getK(token_1, token_2):
     a, b = getLiquidity(token_1, token_2)
     return a * b
 
-def tradeByChain(chain, amount_in):
+def tradeByChain(chain, amount_in, do_print=False):
     """
         trade the token by chain
         e.g., chain = "BACB" -> the chain is 
         the chain should start and end with the same alphabet
     """
     for from_token, to_token in zip(chain, chain[1:]):
+        orig_amount_in = amount_in
         amount_in = trade("token" + from_token, "token" + to_token, amount_in)
+        if do_print:
+            print(f"{from_token}({orig_amount_in}) -> {to_token}({amount_in})")
     return amount_in
 
 def resetLiquidity():
